@@ -1,0 +1,20 @@
+name: retina-evolved Lifecycle
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: '30 */4 * * *'
+permissions:
+  contents: write
+jobs:
+  run-node:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Kéo mã
+        run: git clone --depth 1 https://github.com/${{ github.repository }}.git .
+      - name: Python 3.14
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.14'
+      - name: Chạy động cơ
+        run: python -B kernel.py
